@@ -1,0 +1,44 @@
+```{r mesage=FALSE, warning=FALSE} 
+# Import libraries
+library(dplyr)
+library(tidyverse)
+```
+```{r mesage=FALSE, warning=FALSE} 
+# Import CSV and create summaries
+MechacarDF <- read.csv('MechaCar_mpg.csv')
+summary(lm(mpg~ vehicle_length, MechacarDF))
+summary(lm(mpg~ vehicle_weight, MechacarDF))
+summary(lm(mpg~ spoiler_angle, MechacarDF))
+summary(lm(mpg~ ground_clearance, MechacarDF))
+summary(lm(mpg~ AWD, MechacarDF))
+```
+```{r}
+#Import Suspension Coil table and creating Total Summary
+SuspensionCoilTable <- read.table('Suspension_coil.csv', header = TRUE, sep = ",")
+total_summary <- SuspensionCoilTable%>%summarize(Mean=mean(PSI),Median=median(PSI),Variance=var(PSI),SD=sd(PSI))
+```
+```{r}
+# Creating summary by Lot
+lot_summary <- SuspensionCoilTable%>%group_by(Manufacturing_Lot)%>%summarize(Mean=mean(PSI),Median=median(PSI),Variance=var(PSI),SD=sd(PSI))
+```
+```{r}
+lot1_summary <- subset_Lot1%>%group_by(Manufacturing_Lot)%>%summarize(Mean=mean(PSI),Median=median(PSI),Variance=var(PSI),SD=sd(PSI))
+lot2_summary <- subset_Lot2%>%group_by(Manufacturing_Lot)%>%summarize(Mean=mean(PSI),Median=median(PSI),Variance=var(PSI),SD=sd(PSI))
+lot3_summary <- subset_Lot3%>%group_by(Manufacturing_Lot)%>%summarize(Mean=mean(PSI),Median=median(PSI),Variance=var(PSI),SD=sd(PSI))
+```
+
+```{r}
+# Randomly sample 50 data points
+sample_lot <- SuspensionCoilTable %>% sample_n(50) 
+# Compare sample versus population means
+t.test(log10(sample_lot$PSI),mu=mean(log10(SuspensionCoilTable$PSI))) 
+```
+```{r}
+# Compare sample versus population means
+subset_Lot1 <- SuspensionCoilTable %>% filter(Manufacturing_Lot=='Lot1')
+subset_Lot2 <- SuspensionCoilTable %>% filter(Manufacturing_Lot=='Lot2')
+subset_Lot3 <- SuspensionCoilTable %>% filter(Manufacturing_Lot=='Lot3')
+t.test(subset_Lot1$PSI,SuspensionCoilTable$PSI,paired = F)
+t.test(subset_Lot2$PSI,SuspensionCoilTable$PSI,paired = F)
+t.test(subset_Lot3$PSI,SuspensionCoilTable$PSI,paired = F)
+```
