@@ -67,3 +67,11 @@ According to the T-test for all lots, ther is statisticall diference when compar
 
 ## Study Design: MechaCar vs Competition
 
+One of the most important things to consider when acquiring a car is the future cost of spare parts, therefore it would be important to compare the manteinance cost against the competition.
+
+One way to calculate the manteinance cost would be to compare the non habitual manteinance required in average by the prototype and compare it to a sample of all other manufacturers.
+
+the null hypothesis is that there is no evidence of that the MechaCar requires manteinance more often than the sample with which it's compared, considereing a period of 2 years and excluding all programed services.
+
+The data required is the number of times a car has to attend manteinance services that are not related to habitual manteinance.
+
